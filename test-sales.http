@@ -1,0 +1,66 @@
+#1. Crear Venta (SAGA) - Dispara Trigger:
+POST http://localhost:8082/ms-orch/saga/sale
+Content-Type: application/json
+Accept: application/json
+
+{
+  "saleNumber": "SALE-0071", 
+  "productId": 9,
+  "quantity": 2,
+  "unitPrice": 0.99, 
+  "totalAmount": 310.75,
+  "discountPercentage": 5.0,
+  "discountAmount": 15.54,
+  "finalAmount": 295.21,
+  "saleDate": "2025-09-03",
+  "customerId": 3,
+  "customerName": "Carlos Ruiz",
+  "salesperson": "Ana Torres",
+  "paymentMethod": "card",
+  "paymentStatus": "pending",
+  "notes": "Venta prueba",
+  "createdAt": "2025-09-03T14:30:00",
+  "updatedAt": "2025-09-03T14:30:00"
+}
+
+
+#2. Aumentar Stock en Warehouse:
+PUT http://localhost:8082/ms-warehouse/api/products/3/stock/increase
+Content-Type: application/json
+
+{
+  "quantity": 8
+}
+
+
+#3. Eliminar Asiento Contable:
+DELETE http://localhost:8082/ms-accounting/api/journals/id/7
+
+
+#4. Crear Venta Directa (Microservicio Sales):
+POST http://localhost:8082/ms-sale/api/sales
+Content-Type: application/json
+
+{
+  "saleNumber": "SALE-0006",
+  "productId": 5,
+  "quantity": 3,
+  "unitPrice": 45.90,
+  "totalAmount": 137.70,
+  "discountPercentage": 0.0,
+  "discountAmount": 0.00,
+  "finalAmount": 137.70,
+  "saleDate": "2025-09-03",
+  "customerId": 2,
+  "customerName": "Carlos Ruiz",
+  "salesperson": "Ana Torres",
+  "paymentMethod": "card",
+  "paymentStatus": "pending",
+  "notes": "Venta prueba",
+  "createdAt": "2025-09-03T16:45:00",
+  "updatedAt": "2025-09-03T16:45:00"
+}
+
+
+#5. Eliminar Venta por ID:
+DELETE http://localhost:8082/ms-sale/api/sales/id/5
